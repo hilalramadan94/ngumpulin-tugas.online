@@ -1,46 +1,41 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import { Container, Row, Col, Spinner  } from "reactstrap";
-import { Button, Icon, Alert, ButtonToolbar } from "rsuite";
-import {
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { Container, Row, Col, Spinner } from "reactstrap";
+import { Button, Icon, ButtonToolbar, Message } from "rsuite";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-//import swal from "sweetalert";
-//import { deleteStudent } from "../actions/studentAction";
+import swal from "sweetalert";
+import { deleteStudent } from "../actions/studentAction";
 
 //Method
-// const handleClick = (dispatch, id) => {
-//   swal({
-//     title: "Are you sure to delete this product?",
-//     icon: "warning",
-//     buttons: true,
-//     dangerMode: true,
-//   }).then((willDelete) => {
-//     if (willDelete) {
-//       dispatch(deleteStudent(id));
-//       swal("Deleted Successfully!", {
-//         icon: "success",
-//       });
-//     } else {
-//       swal("Delete Canelled!");
-//     }
-//   });
-// };
+const handleClick = (dispatch, id, name) => {
+  swal({
+    title: "Are you sure to delete this product? " + name,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      dispatch(deleteStudent(id));
+      swal("Deleted Successfully!", {
+        icon: "success",
+      }).then(function () {
+        window.location = "/siswa";
+      });
+    }
+  });
+};
 
 //Table
 const { SearchBar } = Search;
 
-// const defaultSorted = [
-//   {
-//     dataField: "name",
-//     order: "desc",
-//   },
-// ];
+const defaultSorted = [
+  {
+    dataField: "name",
+    order: "desc",
+  },
+];
 
 const mapStateToProps = (state) => {
   return {
@@ -51,10 +46,12 @@ const mapStateToProps = (state) => {
 
 const StudentTableComponent = (props) => {
   //Formating Data From Firebase
-  const newKeys = Object.keys(props.getStudentList)
-  const newData = Object.values(props.getStudentList)
-  for(var i = 0; i < newKeys.length; i++)
-  newData[i]['id'] = newKeys[i];
+  const newKeys = Object.keys(props.getStudentList);
+  const newData = Object.values(props.getStudentList);
+  for (var i = 0; i < newKeys.length; i++) {
+    newData[i]["id"] = newKeys[i];
+    newData[i]["no"] = i + 1;
+  }
 
   const columns = [
     {
@@ -64,14 +61,12 @@ const StudentTableComponent = (props) => {
       hidden: true,
     },
     {
-      dataField: "",
-      text: "Nama",
+      dataField: "no",
+      text: "No",
       sort: true,
       headerStyle: () => {
         return { width: "5%" };
-      },
-      formatter: (rowContent, row, rowIndex) => {
-        return rowIndex+1}
+      }
     },
     {
       dataField: "name",
@@ -99,7 +94,10 @@ const StudentTableComponent = (props) => {
               <Button color="green" href={"detail/" + row.id}>
                 <Icon icon="edit" /> Edit
               </Button>
-              <Button color="red" onClick={() => Alert.error("Data Berhasil Didelete")}>
+              <Button
+                color="red"
+                onClick={() => handleClick(props.dispatch, row.id, row.name)}
+              >
                 <Icon icon="trash" /> Delete
               </Button>
             </ButtonToolbar>
@@ -117,19 +115,16 @@ const StudentTableComponent = (props) => {
           keyField="name"
           data={newData}
           columns={columns}
-          //defaultSorted={defaultSorted}
-          //search
+          defaultSorted={defaultSorted}
+          search
         >
           {(props) => (
             <div>
               <Row>
                 <Col>
-                  <Link to={"/create"}>
-                    <Button color="dark" className="mr-2">
-                      <FontAwesomeIcon icon={faPlus} />
-                      Create New
-                    </Button>
-                  </Link>
+                  <Button color="yellow" href="/create">
+                    <Icon icon="plus" /> Create New
+                  </Button>
                 </Col>
                 <Col>
                   <div className="float-right">
@@ -149,7 +144,12 @@ const StudentTableComponent = (props) => {
       ) : (
         <div className="text-center">
           {props.errorStudentList ? (
-            <h2>{props.errorStudentList}</h2>
+            <Message
+              showIcon
+              type="error"
+              title="Error"
+              description={props.errorStudentList}
+            />
           ) : (
             <Spinner color="primary"></Spinner>
           )}

@@ -21,7 +21,7 @@ import {
     errorResponseDeleteStudent: false,
   };
   
-  const student = (state = initialState, action) => {
+  const students = (state = initialState, action) => {
     switch (action.type) {
       case GET_STUDENTS_LIST:
         return {
@@ -63,5 +63,5 @@ import {
     }
   };
 
-  export default student;
+  export default students;
   

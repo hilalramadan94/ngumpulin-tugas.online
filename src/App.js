@@ -6,6 +6,7 @@ import "rsuite/dist/styles/rsuite-default.css";
 //Component
 import NavBarComponent from "./components/NavBarComponent";
 import SideBarComponent from "./components/SideNavComponent";
+import NavToggle from "./components/SideNavToggleComponent";
 import FooterComponent from "./components/FooterComponent";
 //Container
 import HomeContainer from "./containers/HomeContainer";
@@ -20,31 +21,57 @@ import {
 } from "react-router-dom";
 
 export default class App extends Component {
+  //---
+  constructor(props) {
+    super(props);
+    this.state = {
+      expand: true,
+    };
+    this.handleToggle = this.handleToggle.bind(this);
+  }
+  handleToggle() {
+    this.setState({
+      expand: !this.state.expand,
+    });
+    console.log(this.state.expand);
+  }
+  //---
   render() {
+    const { expand } = this.state;
     return (
-      <Container>
-        <Sidebar style={{ display: "flex", flexDirection: "column" }}>
-          <SideBarComponent></SideBarComponent>
-        </Sidebar>
+      <div className="show-fake-browser sidebar-page">
         <Container>
-          <Header>
-            <NavBarComponent></NavBarComponent>
-          </Header>
-          <Content>
-            <Container>
-            <BrowserRouter>
-              <Route path="/" exact component={HomeContainer} />
-              <Route path="/siswa" exact component={StudentContainer} />
-              <Route path="/pembelajaran" exact component={PembelajaranContainer} />
-              <Route path="/tugas" exact component={TugasContainer} />
-            </BrowserRouter>
-            </Container>
-          </Content>
-          <Footer>
+          <Sidebar
+            style={{ display: "flex", flexDirection: "column" }}
+            width={expand ? 260 : 56}
+            collapsible
+          >
+            <SideBarComponent expand={expand}></SideBarComponent>
+            <NavToggle expand={expand} onChange={this.handleToggle} />
+          </Sidebar>
+
+          <Container>
+            <Header>
+              <NavBarComponent></NavBarComponent>
+            </Header>
+            <Content>
+              <BrowserRouter>
+                <Route path="/" exact component={HomeContainer} />
+                <Route path="/students" exact component={StudentContainer} />
+                <Route
+                  path="/pembelajaran"
+                  exact
+                  component={PembelajaranContainer}
+                />
+                <Route path="/tugas" exact component={TugasContainer} />
+              </BrowserRouter>
+            </Content>
+            <Footer>
             <FooterComponent></FooterComponent>
           </Footer>
+          </Container>
         </Container>
-      </Container>
+      </div>
     );
   }
 }

@@ -7,9 +7,9 @@ const NabBarComponent = () => {
       <Navbar>
         <Navbar.Header></Navbar.Header>
         <Navbar.Body>
-          <Nav pullRight>
+          {/* <Nav pullRight>
             <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
-          </Nav>
+          </Nav> */}
         </Navbar.Body>
       </Navbar>
     </div>

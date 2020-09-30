@@ -3,34 +3,41 @@ import { Sidenav, Dropdown, Nav, Icon } from "rsuite";
 
 //Style
 const headerStyles = {
-    padding: 18,
-    fontSize: 16,
-    height: 56,
-    background: '#34c3ff',
-    color: ' #fff',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden'
-  };
+  padding: 18,
+  fontSize: 16,
+  height: 56,
+  background: "#34c3ff",
+  color: " #fff",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+};
 
-  class SideBarComponent extends React.Component {
+class SideBarComponent extends React.Component {
   render() {
     return (
-      <div style={{ width: 250 }}>
-        <Sidenav>
-        <Sidenav.Header>
-              <div style={headerStyles}>
-                <span style={{ marginLeft: 5 }}>NGUMPULIN-TUGAS.ONLINE</span>
-              </div>
-            </Sidenav.Header>
+      <div>
+        <Sidenav expanded={this.props.expand} appearance="subtle">
+          <Sidenav.Header>
+            <div style={headerStyles}>
+              <span style={{ marginLeft: 5 }}>
+                {this.props.expand ? "NGUMPULIN-TUGAS.ONLINE" : <Icon icon="heart"></Icon>}
+              </span>
+            </div>
+          </Sidenav.Header>
+
           <Sidenav.Body>
             <Nav>
               <Nav.Item href="/" eventKey="1" icon={<Icon icon="dashboard" />}>
-                Dashboard
+                {this.props.expand ? "Dashboard" : ""}
               </Nav.Item>
-              <Nav.Item href="/siswa" eventKey="2" icon={<Icon icon="group" />}>
-                Daftar Siswa
+              <Nav.Item href="/students" eventKey="2" icon={<Icon icon="group" />}>
+                {this.props.expand ? "Daftar Siswa" : ""}
               </Nav.Item>
-              <Nav.Item href="/pembelajaran" eventKey="3" icon={<Icon icon="book" />}>
+              <Nav.Item
+                href="/pembelajaran"
+                eventKey="3"
+                icon={<Icon icon="book" />}
+              >
                 Pembelajaran
               </Nav.Item>
               <Nav.Item href="/tugas" eventKey="4" icon={<Icon icon="task" />}>
