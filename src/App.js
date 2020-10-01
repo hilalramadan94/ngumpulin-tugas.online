@@ -19,6 +19,7 @@ import {
   //BrowserRouter as Router,
   Route,
 } from "react-router-dom";
+import StudentDetailContainer from "./containers/StudentDetailContainer";
 
 export default class App extends Component {
   //---
@@ -33,7 +34,6 @@ export default class App extends Component {
     this.setState({
       expand: !this.state.expand,
     });
-    console.log(this.state.expand);
   }
   //---
   render() {
@@ -64,6 +64,7 @@ export default class App extends Component {
                   component={PembelajaranContainer}
                 />
                 <Route path="/tugas" exact component={TugasContainer} />
+                <Route path="/students/detail/:id" exact component={StudentDetailContainer} />
               </BrowserRouter>
             </Content>
             <Footer>

@@ -88,10 +88,10 @@ const StudentTableComponent = (props) => {
         return (
           <div>
             <ButtonToolbar>
-              <Button color="blue" href={"detail/" + row.id}>
+              <Button color="blue" href={"students/detail/" + row.id}>
                 <Icon icon="detail" /> Detail
               </Button>
-              <Button color="green" href={"detail/" + row.id}>
+              <Button color="green" href={"students/detail/" + row.id}>
                 <Icon icon="edit" /> Edit
               </Button>
               <Button
