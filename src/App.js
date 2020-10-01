@@ -10,16 +10,18 @@ import NavToggle from "./components/SideNavToggleComponent";
 import FooterComponent from "./components/FooterComponent";
 //Container
 import HomeContainer from "./containers/HomeContainer";
-import StudentContainer from "./containers/StudentContainer";
 import PembelajaranContainer from "./containers/PembelajaranContainer";
 import TugasContainer from "./containers/TugasContainer";
+import StudentListContainer from "./containers/StudentListContainer";
+import StudentDetailContainer from "./containers/StudentDetailContainer";
+import StudentEditContainer from "./containers/StudentEditContainer";
 //Routing
 import {
   BrowserRouter,
   //BrowserRouter as Router,
   Route,
 } from "react-router-dom";
-import StudentDetailContainer from "./containers/StudentDetailContainer";
+
 
 export default class App extends Component {
   //---
@@ -57,14 +59,17 @@ export default class App extends Component {
             <Content>
               <BrowserRouter>
                 <Route path="/" exact component={HomeContainer} />
-                <Route path="/students" exact component={StudentContainer} />
+                
+                <Route path="/students" exact component={StudentListContainer} />
+                <Route path="/students/detail/:id" exact component={StudentDetailContainer} />
+                <Route path="/students/edit/:id" exact component={StudentEditContainer} />
+
                 <Route
                   path="/pembelajaran"
                   exact
                   component={PembelajaranContainer}
                 />
                 <Route path="/tugas" exact component={TugasContainer} />
-                <Route path="/students/detail/:id" exact component={StudentDetailContainer} />
               </BrowserRouter>
             </Content>
             <Footer>

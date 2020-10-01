@@ -5,7 +5,7 @@ import { Container } from "rsuite";
 import { connect } from "react-redux";
 import { getStudentList } from "../actions/studentAction";
 
-class StudentContainer extends Component {
+class StudentListContainer extends Component {
   componentDidMount() {
     this.props.dispatch(getStudentList());
   }
@@ -27,5 +27,5 @@ class StudentContainer extends Component {
   }
 }
 
-export default connect()(StudentContainer);
+export default connect()(StudentListContainer);
 //connect untuk menghubungkan ke reducers

@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   return {
     initialValues: {
       name: state.students.getStudentDetail.name,
-      class: state.students.getStudentDetail.class.name,
+      class: state.students.getStudentDetail.class,
     },
   };
 };
@@ -44,23 +44,12 @@ const renderField = ({
   </Row>
 );
 
-class FormComponent extends Component {
+class StudentFormComponent extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
         <FormGroup row>
           <Col md={4}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id"
-                component={renderField}
-                label="Id :"
-                disabled={
-                  this.props.initialValues.id === undefined ? false : true
-                }
-              />
-            </FormGroup>
             <FormGroup>
               <Field
                 type="text"
@@ -72,7 +61,7 @@ class FormComponent extends Component {
             <FormGroup>
               <Field
                 type="text"
-                name="class"
+                name="class.name"
                 component={renderField}
                 label="Class :"
               />
@@ -94,10 +83,10 @@ class FormComponent extends Component {
 }
 
 //Setting Form
-FormComponent = reduxForm({
-  form: "FormComponent",
+StudentFormComponent = reduxForm({
+  form: "StudentFormComponent",
   validate: studentValidation,
-  enableReinitialize: true, //Form Bisa Digunakan di Create dan Edit
-})(FormComponent);
+  enableReinitialize: true, 
+})(StudentFormComponent);
 
-export default connect(mapStateToProps, null)(FormComponent);
+export default connect(mapStateToProps, null)(StudentFormComponent);

@@ -11,7 +11,7 @@ import { deleteStudent } from "../actions/studentAction";
 //Method
 const handleClick = (dispatch, id, name) => {
   swal({
-    title: "Are you sure to delete this product? " + name,
+    title: "Are you sure to delete this student? " + name,
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -91,7 +91,7 @@ const StudentTableComponent = (props) => {
               <Button color="blue" href={"students/detail/" + row.id}>
                 <Icon icon="detail" /> Detail
               </Button>
-              <Button color="green" href={"students/detail/" + row.id}>
+              <Button color="green" href={"students/edit/" + row.id}>
                 <Icon icon="edit" /> Edit
               </Button>
               <Button

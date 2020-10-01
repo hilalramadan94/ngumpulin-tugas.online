@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, } from "rsuite";
+import { Navbar, Avatar, Nav } from "rsuite";
 
 const NabBarComponent = () => {
   return (
@@ -7,9 +7,12 @@ const NabBarComponent = () => {
       <Navbar>
         <Navbar.Header></Navbar.Header>
         <Navbar.Body>
-          {/* <Nav pullRight>
-            <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
-          </Nav> */}
+          <Nav pullRight className="margin-10">
+          <Avatar
+                circle
+                src="https://avatars3.githubusercontent.com/u/5955384?s=60&v=4"
+              />
+          </Nav>
         </Navbar.Body>
       </Navbar>
     </div>
