@@ -7,12 +7,11 @@ export const PUT_STUDENT_EDIT = "PUT_STUDENT_EDIT";
 export const DELETE_STUDENT = "DELETE_STUDENT";
 
 //Action Student List
-export const getStudentList = () => {
+export const getStudentsList = () => {
   return (dispatch) => {
     axios
       .get("https://test-b93f8.firebaseio.com/students.json")
       .then(function (response) {
-        console.log(response);
         dispatch({
           type: GET_STUDENTS_LIST,
           payload: {
@@ -61,16 +60,13 @@ export const getStudentDetail = (id) => {
 
 //Action Student Create
 export const postStudentCreate = (data) => {
-  console.log(data);
   return (dispatch) => {
     axios
-      .put(
-        "https://test-b93f8.firebaseio.com/students/" + data.id + "/.json",
+      .post(
+        "https://test-b93f8.firebaseio.com/students.json",
         data
       )
       .then(function (response) {
-        console.log(response);
-
         dispatch({
           type: POST_STUDENT_CREATE,
           payload: {

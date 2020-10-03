@@ -8,8 +8,8 @@ import {
   
   let initialState = {
     //Student List
-    getStudentList: false,
-    errorStudentList: false,
+    getStudentsList: false,
+    errorStudentsList: false,
     //Student Detail
     getStudentDetail: false,
     errorStudentDetail: false,
@@ -26,8 +26,8 @@ import {
       case GET_STUDENTS_LIST:
         return {
           ...state,
-          getStudentList: action.payload.data,
-          errorStudentList: action.payload.errorMessage,
+          getStudentsList: action.payload.data,
+          errorStudentsList: action.payload.errorMessage,
         };
   
       case GET_STUDENT_DETAIL:

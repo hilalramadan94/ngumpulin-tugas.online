@@ -21,7 +21,7 @@ const handleClick = (dispatch, id, name) => {
       swal("Deleted Successfully!", {
         icon: "success",
       }).then(function () {
-        window.location = "/siswa";
+        window.location = "/students";
       });
     }
   });
@@ -39,15 +39,15 @@ const defaultSorted = [
 
 const mapStateToProps = (state) => {
   return {
-    getStudentList: state.students.getStudentList,
-    errorStudentList: state.students.errorStudentList,
+    getStudentsList: state.students.getStudentsList,
+    errorStudentsList: state.students.errorStudentsList,
   };
 };
 
 const StudentTableComponent = (props) => {
   //Formating Data From Firebase
-  const newKeys = Object.keys(props.getStudentList);
-  const newData = Object.values(props.getStudentList);
+  const newKeys = Object.keys(props.getStudentsList);
+  const newData = Object.values(props.getStudentsList);
   for (var i = 0; i < newKeys.length; i++) {
     newData[i]["id"] = newKeys[i];
     newData[i]["no"] = i + 1;
@@ -109,7 +109,7 @@ const StudentTableComponent = (props) => {
 
   return (
     <Container>
-      {props.getStudentList ? (
+      {props.getStudentsList ? (
         <ToolkitProvider
           bootstrap4
           keyField="name"
@@ -122,7 +122,7 @@ const StudentTableComponent = (props) => {
             <div>
               <Row>
                 <Col>
-                  <Button color="yellow" href="/create">
+                  <Button color="yellow" href="/students/create">
                     <Icon icon="plus" /> Create New
                   </Button>
                 </Col>
@@ -143,12 +143,12 @@ const StudentTableComponent = (props) => {
         </ToolkitProvider>
       ) : (
         <div className="text-center">
-          {props.errorStudentList ? (
+          {props.errorStudentsList ? (
             <Message
               showIcon
               type="error"
               title="Error"
-              description={props.errorStudentList}
+              description={props.errorStudentsList}
             />
           ) : (
             <Spinner color="primary"></Spinner>

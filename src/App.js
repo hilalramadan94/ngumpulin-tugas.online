@@ -15,6 +15,7 @@ import TugasContainer from "./containers/TugasContainer";
 import StudentListContainer from "./containers/StudentListContainer";
 import StudentDetailContainer from "./containers/StudentDetailContainer";
 import StudentEditContainer from "./containers/StudentEditContainer";
+import StudentCreateContainer from "./containers/StudentCreateContainer";
 //Routing
 import {
   BrowserRouter,
@@ -61,6 +62,7 @@ export default class App extends Component {
                 <Route path="/" exact component={HomeContainer} />
                 
                 <Route path="/students" exact component={StudentListContainer} />
+                <Route path="/students/create/" exact component={StudentCreateContainer} />
                 <Route path="/students/detail/:id" exact component={StudentDetailContainer} />
                 <Route path="/students/edit/:id" exact component={StudentEditContainer} />
 

@@ -3,11 +3,13 @@ import StudentTableComponent from "../components/StudentTableComponent";
 import { Container } from "rsuite";
 //import TableComponent from "../components/tableComponent";
 import { connect } from "react-redux";
-import { getStudentList } from "../actions/studentAction";
+import { getStudentsList } from "../actions/studentAction";
+import { getClassesList } from "../actions/classAction";
 
 class StudentListContainer extends Component {
   componentDidMount() {
-    this.props.dispatch(getStudentList());
+    this.props.dispatch(getClassesList());
+    this.props.dispatch(getStudentsList());
   }
 
   render() {

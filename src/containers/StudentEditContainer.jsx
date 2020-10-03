@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import StudentFormComponent from "../components/StudentFormComponent";
 import { Container } from "reactstrap";
 import { getStudentDetail, putStudentEdit } from "../actions/studentAction";
+import { getClassesList } from "../actions/classAction";
 import swal from "sweetalert";
 
 const mapStateToProps = (state) => {
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => {
 class StudentEditContainer extends Component {
   componentDidMount() {
     this.props.dispatch(getStudentDetail(this.props.match.params.id));
+    this.props.dispatch(getClassesList());
   }
 
   //method submit
@@ -32,7 +34,8 @@ class StudentEditContainer extends Component {
           swal(
             "Student Updated!",
             "Name : " +
-              this.props.getResponseDataStudent.name
+              this.props.getResponseDataStudent.name,
+              "success"
           ).then(function () {
             window.location = "/students";
           });
