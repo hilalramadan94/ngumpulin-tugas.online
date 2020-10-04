@@ -3,29 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { Container, Row, Col, Spinner } from "reactstrap";
 import { Button, Icon, ButtonToolbar, Message } from "rsuite";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
-import swal from "sweetalert";
-import { deleteStudent } from "../actions/studentAction";
-
-//Method
-const handleClick = (dispatch, id, name) => {
-  swal({
-    title: "Are you sure to delete this student? " + name,
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-  }).then((willDelete) => {
-    if (willDelete) {
-      dispatch(deleteStudent(id));
-      swal("Deleted Successfully!", {
-        icon: "success",
-      }).then(function () {
-        window.location = "/students";
-      });
-    }
-  });
-};
 
 //Table
 const { SearchBar } = Search;
@@ -39,15 +17,15 @@ const defaultSorted = [
 
 const mapStateToProps = (state) => {
   return {
-    getStudentsList: state.students.getStudentsList,
-    errorStudentsList: state.students.errorStudentsList,
+    getSubjectsList: state.subjects.getSubjectsList,
+    errorSubjectsList: state.subjects.errorSubjectsList,
   };
 };
 
-const StudentTableComponent = (props) => {
+const SubjectTableComponent = (props) => {
   //Formating Data From Firebase
-  const newKeys = Object.keys(props.getStudentsList);
-  const newData = Object.values(props.getStudentsList);
+  const newKeys = Object.keys(props.getSubjectsList);
+  const newData = Object.values(props.getSubjectsList);
   for (var i = 0; i < newKeys.length; i++) {
     newData[i]["id"] = newKeys[i];
     newData[i]["no"] = i + 1;
@@ -74,16 +52,6 @@ const StudentTableComponent = (props) => {
       sort: true,
     },
     {
-      dataField: "class.name",
-      text: "Kelas",
-      sort: true,
-    },
-    {
-      dataField: "class.year",
-      text: "Tahun",
-      sort: true,
-    },
-    {
       dataField: "link",
       text: "Action",
       headerStyle: () => {
@@ -93,17 +61,8 @@ const StudentTableComponent = (props) => {
         return (
           <div>
             <ButtonToolbar>
-              <Button color="blue" href={"students/detail/" + row.id}>
+              <Button color="blue" href={"subjects/detail/" + row.id}>
                 <Icon icon="detail" /> Detail
-              </Button>
-              <Button color="green" href={"students/edit/" + row.id}>
-                <Icon icon="edit" /> Edit
-              </Button>
-              <Button
-                color="red"
-                onClick={() => handleClick(props.dispatch, row.id, row.name)}
-              >
-                <Icon icon="trash" /> Delete
               </Button>
             </ButtonToolbar>
           </div>
@@ -114,7 +73,7 @@ const StudentTableComponent = (props) => {
 
   return (
     <Container>
-      {props.getStudentsList ? (
+      {props.getSubjectsList ? (
         <ToolkitProvider
           bootstrap4
           keyField="name"
@@ -127,11 +86,6 @@ const StudentTableComponent = (props) => {
             <div>
               <Row>
                 <Col>
-                  <Button color="yellow" href="/students/create">
-                    <Icon icon="plus" /> Create New
-                  </Button>
-                </Col>
-                <Col>
                   <div className="float-right">
                     <SearchBar {...props.searchProps} />
                   </div>
@@ -141,19 +95,18 @@ const StudentTableComponent = (props) => {
 
               <BootstrapTable
                 {...props.baseProps}
-                pagination={paginationFactory()}
               />
             </div>
           )}
         </ToolkitProvider>
       ) : (
         <div className="text-center">
-          {props.errorStudentsList ? (
+          {props.errorSubjectsList ? (
             <Message
               showIcon
               type="error"
               title="Error"
-              description={props.errorStudentsList}
+              description={props.errorSubjectsList}
             />
           ) : (
             <Spinner color="primary"></Spinner>
@@ -164,4 +117,4 @@ const StudentTableComponent = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(StudentTableComponent);
+export default connect(mapStateToProps, null)(SubjectTableComponent);

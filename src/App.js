@@ -10,7 +10,7 @@ import NavToggle from "./components/SideNavToggleComponent";
 import FooterComponent from "./components/FooterComponent";
 //Container
 import HomeContainer from "./containers/HomeContainer";
-import PembelajaranContainer from "./containers/PembelajaranContainer";
+import SubjectsListContainer from "./containers/SubjectsListContainer";
 import TugasContainer from "./containers/TugasContainer";
 import StudentListContainer from "./containers/StudentListContainer";
 import StudentDetailContainer from "./containers/StudentDetailContainer";
@@ -23,16 +23,16 @@ import {
   Route,
 } from "react-router-dom";
 
-
 export default class App extends Component {
   //---
   constructor(props) {
     super(props);
     this.state = {
-      expand: true,
+      expand: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
+
   handleToggle() {
     this.setState({
       expand: !this.state.expand,
@@ -60,23 +60,35 @@ export default class App extends Component {
             <Content>
               <BrowserRouter>
                 <Route path="/" exact component={HomeContainer} />
-                
-                <Route path="/students" exact component={StudentListContainer} />
-                <Route path="/students/create/" exact component={StudentCreateContainer} />
-                <Route path="/students/detail/:id" exact component={StudentDetailContainer} />
-                <Route path="/students/edit/:id" exact component={StudentEditContainer} />
 
                 <Route
-                  path="/pembelajaran"
+                  path="/students"
                   exact
-                  component={PembelajaranContainer}
+                  component={StudentListContainer}
                 />
-                <Route path="/tugas" exact component={TugasContainer} />
+                <Route
+                  path="/students/create/"
+                  exact
+                  component={StudentCreateContainer}
+                />
+                <Route
+                  path="/students/detail/:id"
+                  exact
+                  component={StudentDetailContainer}
+                />
+                <Route
+                  path="/students/edit/:id"
+                  exact
+                  component={StudentEditContainer}
+                />
+
+                <Route path="/subjects" exact component={SubjectsListContainer} />
+                <Route path="/tasks" exact component={TugasContainer} />
               </BrowserRouter>
             </Content>
             <Footer>
-            <FooterComponent></FooterComponent>
-          </Footer>
+              <FooterComponent></FooterComponent>
+            </Footer>
           </Container>
         </Container>
       </div>

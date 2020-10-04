@@ -20,7 +20,11 @@ class SideBarComponent extends React.Component {
           <Sidenav.Header>
             <div style={headerStyles}>
               <span style={{ marginLeft: 5 }}>
-                {this.props.expand ? "NGUMPULIN-TUGAS.ONLINE" : <Icon icon="heart"></Icon>}
+                {this.props.expand ? (
+                  "NGUMPULIN-TUGAS.ONLINE"
+                ) : (
+                  <Icon icon="heart"></Icon>
+                )}
               </span>
             </div>
           </Sidenav.Header>
@@ -28,19 +32,23 @@ class SideBarComponent extends React.Component {
           <Sidenav.Body>
             <Nav>
               <Nav.Item href="/" eventKey="1" icon={<Icon icon="dashboard" />}>
-                {this.props.expand ? "Dashboard" : ""}
-              </Nav.Item>
-              <Nav.Item href="/students" eventKey="2" icon={<Icon icon="group" />}>
-                {this.props.expand ? "Daftar Siswa" : ""}
+                Dashboard
               </Nav.Item>
               <Nav.Item
-                href="/pembelajaran"
+                href="/students"
+                eventKey="2"
+                icon={<Icon icon="group" />}
+              >
+                Daftar Siswa
+              </Nav.Item>
+              <Nav.Item
+                href="/subjects"
                 eventKey="3"
                 icon={<Icon icon="book" />}
               >
                 Pembelajaran
               </Nav.Item>
-              <Nav.Item href="/tugas" eventKey="4" icon={<Icon icon="task" />}>
+              <Nav.Item href="/tasks" eventKey="4" icon={<Icon icon="task" />}>
                 Tugas
               </Nav.Item>
               <Dropdown

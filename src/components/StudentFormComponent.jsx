@@ -110,12 +110,28 @@ class StudentFormComponent extends Component {
               />
             </FormGroup>
             <FormGroup>
+              <Field
+                type="text"
+                name="class.year"
+                component={renderField}
+                label="Tahun :"
+              />
+            </FormGroup>
+            <FormGroup className="text-center">
               <Button
                 type="submit"
-                color="dark"
+                color="primary"
                 disabled={this.props.submitting}
               >
                 Submit
+              </Button>
+              &nbsp;
+              <Button
+                type="button"
+                color="secondary"
+                href="/students"
+              >
+                Cancel
               </Button>
             </FormGroup>
           </Col>

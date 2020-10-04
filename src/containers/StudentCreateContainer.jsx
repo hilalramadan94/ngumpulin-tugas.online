@@ -31,7 +31,7 @@ class CreateStudentContainer extends Component {
       if (this.props.getResponseDataStudent) {
         swal(
           "Student Created!",
-          "Name : " +
+          "ID : " +
             this.props.getResponseDataStudent.name,
           "success"
         ).then(function () {

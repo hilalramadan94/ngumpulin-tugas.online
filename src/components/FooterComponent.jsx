@@ -7,8 +7,10 @@ export default class FooterComponent extends Component {
         <footer className="footer">
           <div className="container text-center">
             <span className="text-muted">
-              Developed By :{" "}
-              <a href="https://github.com/hilalramadan94">Hilal</a> © 2020
+              Created By : &nbsp;
+              <a href="https://github.com/hilalramadan94">Hilal</a> & &nbsp;
+              <a href="https://github.com/hilalramadan94">Putri</a> 
+              <br />@ 2020
             </span>
           </div>
         </footer>

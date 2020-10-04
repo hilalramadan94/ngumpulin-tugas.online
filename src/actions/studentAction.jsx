@@ -93,8 +93,6 @@ export const putStudentEdit = (data, id) => {
     axios
       .put("https://test-b93f8.firebaseio.com/students/" + id + ".json", data)
       .then(function (response) {
-        console.log(response);
-
         dispatch({
           type: PUT_STUDENT_EDIT,
           payload: {

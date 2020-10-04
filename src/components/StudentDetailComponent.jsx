@@ -27,6 +27,10 @@ export const DetailStudentComponent = (props) => {
               <td>Kelas </td>
               <td>: {props.getStudentDetail.class.name}</td>
             </tr>
+            <tr>
+              <td>Tahun </td>
+              <td>: {props.getStudentDetail.class.year}</td>
+            </tr>
           </tbody>
         </Table>
       ) : (
