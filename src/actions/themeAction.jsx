@@ -7,12 +7,11 @@ export const PUT_THEME_EDIT = "PUT_THEME_EDIT";
 export const DELETE_THEME = "DELETE_THEME";
 
 //Action Theme List
-export const getThemeList = () => {
+export const getThemesList = () => {
   return (dispatch) => {
     axios
       .get("https://test-b93f8.firebaseio.com/themes.json")
       .then(function (response) {
-        console.log(response);
         dispatch({
           type: GET_THEMES_LIST,
           payload: {
@@ -61,7 +60,6 @@ export const getThemeDetail = (id) => {
 
 //Action Theme Create
 export const postThemeCreate = (data) => {
-  console.log(data);
   return (dispatch) => {
     axios
       .put(

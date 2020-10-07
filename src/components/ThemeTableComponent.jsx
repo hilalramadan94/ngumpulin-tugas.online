@@ -1,33 +1,10 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Container, Row, Col, Spinner } from "reactstrap";
-import { Button, Icon, ButtonToolbar, Message } from "rsuite";
+import { Button, Icon, ButtonToolbar, Message, IconButton } from "rsuite";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
-import swal from "sweetalert";
-import { deleteStudent, getStudentsList } from "../actions/studentAction";
-import { Link } from "react-router-dom";
-
-//Method
-const handleClick = (dispatch, id, name) => {
-  swal({
-    title: "Are you sure to delete this student? " + name,
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-  }).then((willDelete) => {
-    if (willDelete) {
-      dispatch(deleteStudent(id));
-      swal("Deleted Successfully!", {
-        icon: "success",
-      }).then(function () {
-        console.log('delete ok');
-        dispatch(getStudentsList());
-      });
-    }
-  });
-};
 
 //Table
 const { SearchBar } = Search;
@@ -41,18 +18,26 @@ const defaultSorted = [
 
 const mapStateToProps = (state) => {
   return {
-    getStudentsList: state.students.getStudentsList,
-    errorStudentsList: state.students.errorStudentsList,
+    getThemesList: state.themes.getThemesList,
+    errorThemesList: state.themes.errorThemesList,
   };
 };
 
-const StudentTableComponent = (props) => {
+const ThemeTableComponent = (props) => {
   //Formating Data From Firebase
-  const newKeys = Object.keys(props.getStudentsList);
-  const newData = Object.values(props.getStudentsList);
+  const newKeys = Object.keys(props.getThemesList);
+  const newData = Object.values(props.getThemesList);
+  var currentdate = new Date();
+  currentdate =
+    currentdate.getDate() +
+    "/" +
+    currentdate.getMonth() +
+    "/" +
+    currentdate.getFullYear();
   for (var i = 0; i < newKeys.length; i++) {
     newData[i]["id"] = newKeys[i];
     newData[i]["no"] = i + 1;
+    newData[i]["finishdate"] = currentdate;
   }
 
   const columns = [
@@ -76,47 +61,60 @@ const StudentTableComponent = (props) => {
       sort: true,
     },
     {
-      dataField: "class.name",
-      text: "Kelas",
-      sort: true,
+      dataField: "link",
+      text: "Subtema",
+      headerStyle: () => {
+        return { width: "40%" };
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <div className="text-center">
+            <ButtonToolbar>
+              &nbsp;
+              <Button
+                color="primary"
+                disabled={row.id > 2 ? true : false}
+                href={"themes/detail/" + row.id}
+              >
+                <Icon icon={row.id > 2 ? "close" : "check"} /> 1
+              </Button>
+              <Button
+                color="primary"
+                disabled={row.id > 2 ? true : false}
+                href={"themes/detail/" + row.id}
+              >
+                <Icon icon={row.id > 2 ? "close" : "check"} /> 2
+              </Button>
+              <Button
+                color="primary"
+                disabled={row.id > 2 ? true : false}
+                href={"themes/detail/" + row.id}
+              >
+                <Icon icon={row.id > 2 ? "close" : "check"} /> 3
+              </Button>
+            </ButtonToolbar>
+          </div>
+        );
+      },
     },
     {
-      dataField: "class.year",
-      text: "Tahun",
+      dataField: "finishdate",
+      text: "Tanggal Selesai",
       sort: true,
     },
     {
       dataField: "link",
       text: "Action",
       headerStyle: () => {
-        return { width: "25%" };
+        return { width: "10%" };
       },
       formatter: (rowContent, row) => {
         return (
           <div>
             <ButtonToolbar>
-              <Button
-                color="blue"
-                componentClass={Link}
-                to={"students/detail/" + row.id}
-              >
-                <Icon icon="detail" /> Detail
-              </Button>
-              <Button
-                color="green"
-                componentClass={Link}
-                to={"students/edit/" + row.id}
-              >
-                <Icon icon="edit" /> Edit
-              </Button>
-              <Button
-                color="red"
-                onClick={() =>
-                  handleClick(props.dispatch, row.id, row.name)
-                }
-              >
-                <Icon icon="trash" /> Delete
-              </Button>
+              <IconButton color="blue" href={"themes/detail/" + row.id} icon={<Icon icon="detail" /> }>
+                <span className="d-none d-sm-block" >Detail</span>
+              </IconButton>
             </ButtonToolbar>
           </div>
         );
@@ -125,8 +123,8 @@ const StudentTableComponent = (props) => {
   ];
 
   return (
-    <Container>
-      {props.getStudentsList ? (
+    <Container className="container-fluid">
+      {props.getThemesList ? (
         <ToolkitProvider
           bootstrap4
           keyField="name"
@@ -139,13 +137,13 @@ const StudentTableComponent = (props) => {
             <div>
               <Row>
                 <Col>
-                  <Button
+                  <IconButton
                     color="yellow"
-                    componentClass={Link}
-                    to="/students/create"
+                    href="/themes/create"
+                    icon={<Icon icon="plus" />}
                   >
-                    <Icon icon="plus" /> Create New
-                  </Button>
+                    <span className="d-none d-sm-block">Create New</span>
+                  </IconButton>
                 </Col>
                 <Col>
                   <div className="float-right">
@@ -164,12 +162,12 @@ const StudentTableComponent = (props) => {
         </ToolkitProvider>
       ) : (
         <div className="text-center">
-          {props.errorStudentsList ? (
+          {props.errorThemesList ? (
             <Message
               showIcon
               type="error"
               title="Error"
-              description={props.errorStudentsList}
+              description={props.errorThemesList}
             />
           ) : (
             <Spinner color="primary"></Spinner>
@@ -180,4 +178,4 @@ const StudentTableComponent = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(StudentTableComponent);
+export default connect(mapStateToProps, null)(ThemeTableComponent);

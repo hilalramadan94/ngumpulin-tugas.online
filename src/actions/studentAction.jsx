@@ -12,6 +12,7 @@ export const getStudentsList = () => {
     axios
       .get("https://test-b93f8.firebaseio.com/students.json")
       .then(function (response) {
+        console.log(response.data);
         dispatch({
           type: GET_STUDENTS_LIST,
           payload: {

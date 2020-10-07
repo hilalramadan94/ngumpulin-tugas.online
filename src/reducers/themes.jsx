@@ -8,8 +8,8 @@ import {
   
   let initialState = {
     //Theme List
-    getThemeList: false,
-    errorThemeList: false,
+    getThemesList: false,
+    errorThemesList: false,
     //Theme Detail
     getThemeDetail: false,
     errorThemeDetail: false,
@@ -26,8 +26,8 @@ import {
       case GET_THEMES_LIST:
         return {
           ...state,
-          getThemeList: action.payload.data,
-          errorThemeList: action.payload.errorMessage,
+          getThemesList: action.payload.data,
+          errorThemesList: action.payload.errorMessage,
         };
   
       case GET_THEME_DETAIL:

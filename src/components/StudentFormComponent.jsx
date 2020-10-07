@@ -1,7 +1,9 @@
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import { Col, FormGroup, Row, Input, Label, Button } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button } from "rsuite";
+import { Col, FormGroup, Row, Input, Label  } from "reactstrap";
 import studentValidation from "../validations/studentValidation";
 import { getClassesList } from "../actions/classAction";
 
@@ -128,8 +130,8 @@ class StudentFormComponent extends Component {
               &nbsp;
               <Button
                 type="button"
-                color="secondary"
-                href="/students"
+                color="yellow"
+                componentClass={Link} to="/students"
               >
                 Cancel
               </Button>

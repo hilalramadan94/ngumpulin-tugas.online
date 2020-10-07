@@ -16,7 +16,7 @@ class StudentListContainer extends Component {
         <br />
         <Container>
           <center>
-            <h1>Daftar Siswa</h1>
+            <h1 style={{margin:50}}>Daftar Siswa</h1>
           </center>
         </Container>
         <br />

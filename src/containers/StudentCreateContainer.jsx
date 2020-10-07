@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import StudentFormComponent from "../components/StudentFormComponent";
 import { connect } from "react-redux";
-import { postStudentCreate } from "../actions/studentAction";
+import { getStudentsList, postStudentCreate } from "../actions/studentAction";
 import { getClassesList } from "../actions/classAction";
 import swal from "sweetalert";
+import { Redirect } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -14,32 +15,40 @@ const mapStateToProps = (state) => {
 };
 
 class CreateStudentContainer extends Component {
+  state = {
+    redirect: false,
+  };
+
   componentDidMount() {
     this.props.dispatch(getClassesList());
   }
 
   handleSubmit(data) {
-    console.log(data);
     this.props.dispatch(postStudentCreate(data));
+    this.props.dispatch(getStudentsList());
+    this.setState({ redirect: true });
   }
 
   render() {
-    if (
-      this.props.errorResponseDataStudent ||
-      this.props.getResponseDataStudent
-    )
-      if (this.props.getResponseDataStudent) {
-        swal(
-          "Student Created!",
-          "ID : " +
-            this.props.getResponseDataStudent.name,
-          "success"
-        ).then(function () {
-            window.location = "/students";
-        });
-      } else {
-        swal("Failed!", this.props.errorResponseDataStudent, "error");
-      }
+    const { redirect } = this.state;
+
+    if (redirect) {
+      if (
+        this.props.errorResponseDataStudent ||
+        this.props.getResponseDataStudent
+      )
+        if (this.props.getResponseDataStudent) {
+          swal(
+            "Student Created!",
+            "ID : " + this.props.getResponseDataStudent.name,
+            "success"
+          );
+        } else {
+          swal("Failed!", this.props.errorResponseDataStudent, "error");
+        }
+
+      return <Redirect to="/students" />;
+    }
 
     return (
       <Container>

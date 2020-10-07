@@ -12,6 +12,8 @@ import FooterComponent from "./components/FooterComponent";
 import HomeContainer from "./containers/HomeContainer";
 import SubjectsListContainer from "./containers/SubjectsListContainer";
 import TugasContainer from "./containers/TugasContainer";
+import ThemesListContainer from "./containers/ThemesListContainer";
+//Students Container
 import StudentListContainer from "./containers/StudentListContainer";
 import StudentDetailContainer from "./containers/StudentDetailContainer";
 import StudentEditContainer from "./containers/StudentEditContainer";
@@ -43,22 +45,22 @@ export default class App extends Component {
     const { expand } = this.state;
     return (
       <div className="show-fake-browser sidebar-page">
-        <Container>
-          <Sidebar
-            style={{ display: "flex", flexDirection: "column" }}
-            width={expand ? 260 : 56}
-            collapsible
-          >
-            <SideBarComponent expand={expand}></SideBarComponent>
-            <NavToggle expand={expand} onChange={this.handleToggle} />
-          </Sidebar>
-
+        <BrowserRouter>
           <Container>
-            <Header>
-              <NavBarComponent></NavBarComponent>
-            </Header>
-            <Content>
-              <BrowserRouter>
+            <Sidebar
+              style={{ display: "flex", flexDirection: "column" }}
+              width={expand ? 260 : 56}
+              collapsible
+            >
+              <SideBarComponent expand={expand}></SideBarComponent>
+              <NavToggle expand={expand} onChange={this.handleToggle} />
+            </Sidebar>
+
+            <Container>
+              <Header>
+                <NavBarComponent></NavBarComponent>
+              </Header>
+              <Content>
                 <Route path="/" exact component={HomeContainer} />
 
                 <Route
@@ -82,15 +84,20 @@ export default class App extends Component {
                   component={StudentEditContainer}
                 />
 
-                <Route path="/subjects" exact component={SubjectsListContainer} />
+                <Route
+                  path="/subjects"
+                  exact
+                  component={SubjectsListContainer}
+                />
+                <Route path="/themes" exact component={ThemesListContainer} />
                 <Route path="/tasks" exact component={TugasContainer} />
-              </BrowserRouter>
-            </Content>
-            <Footer>
-              <FooterComponent></FooterComponent>
-            </Footer>
+              </Content>
+              <Footer>
+                <FooterComponent></FooterComponent>
+              </Footer>
+            </Container>
           </Container>
-        </Container>
+        </BrowserRouter>
       </div>
     );
   }

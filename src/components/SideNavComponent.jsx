@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Sidenav, Dropdown, Nav, Icon } from "rsuite";
 
 //Style
@@ -35,21 +36,25 @@ class SideBarComponent extends React.Component {
                 Dashboard
               </Nav.Item>
               <Nav.Item
-                href="/students"
+                //href="/students"
+                componentClass={Link} to="/students"
                 eventKey="2"
                 icon={<Icon icon="group" />}
               >
                 Daftar Siswa
               </Nav.Item>
+              <Nav.Item 
+              //href="/themes"
+              componentClass={Link} to="/themes"
+               eventKey="3" icon={<Icon icon="book2" />}>
+                Tematik
+              </Nav.Item>
               <Nav.Item
                 href="/subjects"
-                eventKey="3"
+                eventKey="4"
                 icon={<Icon icon="book" />}
               >
                 Pembelajaran
-              </Nav.Item>
-              <Nav.Item href="/tasks" eventKey="4" icon={<Icon icon="task" />}>
-                Tugas
               </Nav.Item>
               <Dropdown
                 eventKey="5"
