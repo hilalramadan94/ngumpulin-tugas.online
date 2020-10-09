@@ -4,6 +4,7 @@ import { Navbar, Avatar, Nav } from "rsuite";
 const NabBarComponent = () => {
   return (
     <div>
+
       <Navbar> 
         <Navbar.Header></Navbar.Header>
         <Navbar.Body>
@@ -15,6 +16,7 @@ const NabBarComponent = () => {
           </Nav>
         </Navbar.Body>
       </Navbar>
+
     </div>
   );
 };

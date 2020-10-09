@@ -10,6 +10,11 @@ class StudentListContainer extends Component {
     this.props.dispatch(getStudentsList());
   }
 
+  handleRefresh(){
+    this.props.dispatch(getStudentsList());
+    console.log('test');
+  }
+
   render() {
     return (
       <div>

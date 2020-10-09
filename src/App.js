@@ -44,7 +44,8 @@ export default class App extends Component {
   render() {
     const { expand } = this.state;
     return (
-      <div className="show-fake-browser sidebar-page">
+      <div>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
         <BrowserRouter>
           <Container>
             <Sidebar

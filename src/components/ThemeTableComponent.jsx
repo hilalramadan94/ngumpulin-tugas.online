@@ -5,6 +5,7 @@ import { Button, Icon, ButtonToolbar, Message, IconButton } from "rsuite";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 //Table
 const { SearchBar } = Search;
@@ -112,8 +113,12 @@ const ThemeTableComponent = (props) => {
         return (
           <div>
             <ButtonToolbar>
-              <IconButton color="blue" href={"themes/detail/" + row.id} icon={<Icon icon="detail" /> }>
-                <span className="d-none d-sm-block" >Detail</span>
+              <IconButton
+                color="blue"
+                href={"themes/detail/" + row.id}
+                icon={<Icon icon="detail" />}
+              >
+                <span className="d-none d-sm-block">Detail</span>
               </IconButton>
             </ButtonToolbar>
           </div>
@@ -139,10 +144,19 @@ const ThemeTableComponent = (props) => {
                 <Col>
                   <IconButton
                     color="yellow"
-                    href="/themes/create"
+                    children={Link}
+                    to="/themes/create"
                     icon={<Icon icon="plus" />}
                   >
                     <span className="d-none d-sm-block">Create New</span>
+                  </IconButton>
+                  &nbsp;
+                  <IconButton
+                    color="green"
+                    href="/themes/create"
+                    icon={<Icon icon="plus" />}
+                  >
+                    <span className="d-none d-sm-block">Refresh</span>
                   </IconButton>
                 </Col>
                 <Col>

@@ -1,13 +1,14 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Container, Row, Col, Spinner } from "reactstrap";
-import { Button, Icon, ButtonToolbar, Message } from "rsuite";
+import { Button, Icon, ButtonToolbar, Message, IconButton } from "rsuite";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
 import swal from "sweetalert";
 import { deleteStudent, getStudentsList } from "../actions/studentAction";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 //Method
 const handleClick = (dispatch, id, name) => {
@@ -22,7 +23,7 @@ const handleClick = (dispatch, id, name) => {
       swal("Deleted Successfully!", {
         icon: "success",
       }).then(function () {
-        console.log('delete ok');
+        console.log("delete ok");
         dispatch(getStudentsList());
       });
     }
@@ -38,13 +39,6 @@ const defaultSorted = [
     order: "desc",
   },
 ];
-
-const mapStateToProps = (state) => {
-  return {
-    getStudentsList: state.students.getStudentsList,
-    errorStudentsList: state.students.errorStudentsList,
-  };
-};
 
 const StudentTableComponent = (props) => {
   //Formating Data From Firebase
@@ -79,11 +73,13 @@ const StudentTableComponent = (props) => {
       dataField: "class.name",
       text: "Kelas",
       sort: true,
+      hidden: isMobile,
     },
     {
       dataField: "class.year",
       text: "Tahun",
       sort: true,
+      hidden: isMobile,
     },
     {
       dataField: "link",
@@ -111,9 +107,7 @@ const StudentTableComponent = (props) => {
               </Button>
               <Button
                 color="red"
-                onClick={() =>
-                  handleClick(props.dispatch, row.id, row.name)
-                }
+                onClick={() => handleClick(props.dispatch, row.id, row.name)}
               >
                 <Icon icon="trash" /> Delete
               </Button>
@@ -139,13 +133,14 @@ const StudentTableComponent = (props) => {
             <div>
               <Row>
                 <Col>
-                  <Button
+                  <IconButton
                     color="yellow"
                     componentClass={Link}
                     to="/students/create"
+                    icon={<Icon icon="plus" />}
                   >
-                    <Icon icon="plus" /> Create New
-                  </Button>
+                    <span className="d-none d-sm-block">Create New</span>
+                  </IconButton>
                 </Col>
                 <Col>
                   <div className="float-right">
@@ -178,6 +173,13 @@ const StudentTableComponent = (props) => {
       )}
     </Container>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    getStudentsList: state.students.getStudentsList,
+    errorStudentsList: state.students.errorStudentsList,
+  };
 };
 
 export default connect(mapStateToProps, null)(StudentTableComponent);
