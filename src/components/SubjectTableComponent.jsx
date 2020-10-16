@@ -61,7 +61,7 @@ const SubjectTableComponent = (props) => {
         return (
           <div>
             <ButtonToolbar>
-              <Button color="blue" href={"subjects/detail/" + row.id}>
+              <Button color="blue" href={"subjects/detail/" + row.name}>
                 <Icon icon="detail" /> Detail
               </Button>
             </ButtonToolbar>

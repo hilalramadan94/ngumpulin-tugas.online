@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from "rsuite";
+import "./Components.css";
 
 export default class FooterComponent extends Component {
   render() {

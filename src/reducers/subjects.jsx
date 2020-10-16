@@ -1,8 +1,13 @@
-import { GET_SUBJECTS_LIST } from "../actions/subjectAction";
+import {
+  GET_SUBJECTS_LIST,
+  GET_SUBJECTS_VIDEO,
+} from "../actions/subjectAction";
 
 let initialState = {
   getSubjectsList: false,
   errorSubjectsList: false,
+  getSubjectsVideo: false,
+  errorSubjectsVideo: false,
 };
 
 const classes = (state = initialState, action) => {
@@ -12,6 +17,13 @@ const classes = (state = initialState, action) => {
         ...state,
         getSubjectsList: action.payload.data,
         errorSubjectsList: action.payload.errorMessage,
+      };
+
+    case GET_SUBJECTS_VIDEO:
+      return {
+        ...state,
+        getSubjectsVideo: action.payload.data,
+        errorSubjectsVideo: action.payload.errorMessage,
       };
 
     default:

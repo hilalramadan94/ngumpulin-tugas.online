@@ -167,7 +167,7 @@ const StudentTableComponent = (props) => {
               description={props.errorStudentsList}
             />
           ) : (
-            <Spinner color="primary"></Spinner>
+            <Spinner style={{ width: '3rem', height: '3rem' }} color="primary"></Spinner>
           )}
         </div>
       )}

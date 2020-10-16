@@ -10,7 +10,6 @@ import NavToggle from "./components/SideNavToggleComponent";
 import FooterComponent from "./components/FooterComponent";
 //Container
 import HomeContainer from "./containers/HomeContainer";
-import SubjectsListContainer from "./containers/SubjectsListContainer";
 import TugasContainer from "./containers/TugasContainer";
 import ThemesListContainer from "./containers/ThemesListContainer";
 //Students Container
@@ -18,12 +17,16 @@ import StudentListContainer from "./containers/StudentListContainer";
 import StudentDetailContainer from "./containers/StudentDetailContainer";
 import StudentEditContainer from "./containers/StudentEditContainer";
 import StudentCreateContainer from "./containers/StudentCreateContainer";
+//Subject Container
+import SubjectsListContainer from "./containers/SubjectsListContainer";
+import SubjectDetailContainer from "./containers/SubjectDetailContainer";
 //Routing
 import {
   BrowserRouter,
   //BrowserRouter as Router,
   Route,
 } from "react-router-dom";
+import "./App.css";
 
 export default class App extends Component {
   //---
@@ -31,6 +34,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       expand: false,
+      width: 0,
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
@@ -43,14 +47,21 @@ export default class App extends Component {
   //---
   render() {
     const { expand } = this.state;
+    const sideBarSize = window.innerWidth < 480 ? window.innerWidth : 260;
+    const isHidden =
+      sideBarSize === window.innerWidth && expand ? "hidden" : "";
+
     return (
       <div>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        ></meta>
         <BrowserRouter>
           <Container>
             <Sidebar
-              style={{ display: "flex", flexDirection: "column" }}
-              width={expand ? 260 : 56}
+              className="app__sidebar"
+              width={expand ? sideBarSize : 56}
               collapsible
             >
               <SideBarComponent expand={expand}></SideBarComponent>
@@ -58,10 +69,10 @@ export default class App extends Component {
             </Sidebar>
 
             <Container>
-              <Header>
+              <Header className="app__header">
                 <NavBarComponent></NavBarComponent>
               </Header>
-              <Content>
+              <Content className="app__content">
                 <Route path="/" exact component={HomeContainer} />
 
                 <Route
@@ -90,10 +101,16 @@ export default class App extends Component {
                   exact
                   component={SubjectsListContainer}
                 />
+                <Route
+                  path="/subjects/detail/:id"
+                  exact
+                  component={SubjectDetailContainer}
+                />
+
                 <Route path="/themes" exact component={ThemesListContainer} />
                 <Route path="/tasks" exact component={TugasContainer} />
               </Content>
-              <Footer>
+              <Footer className={isHidden}>
                 <FooterComponent></FooterComponent>
               </Footer>
             </Container>

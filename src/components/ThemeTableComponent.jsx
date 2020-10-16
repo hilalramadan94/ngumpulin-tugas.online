@@ -142,7 +142,7 @@ const ThemeTableComponent = (props) => {
             <div>
               <Row>
                 <Col>
-                  <IconButton
+                  {/* <IconButton
                     color="yellow"
                     children={Link}
                     to="/themes/create"
@@ -157,7 +157,7 @@ const ThemeTableComponent = (props) => {
                     icon={<Icon icon="plus" />}
                   >
                     <span className="d-none d-sm-block">Refresh</span>
-                  </IconButton>
+                  </IconButton> */}
                 </Col>
                 <Col>
                   <div className="float-right">

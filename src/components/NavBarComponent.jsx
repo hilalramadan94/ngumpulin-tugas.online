@@ -1,10 +1,10 @@
 import React from "react";
 import { Navbar, Avatar, Nav } from "rsuite";
+import "./Components.css";
 
 const NabBarComponent = () => {
   return (
     <div>
-
       <Navbar> 
         <Navbar.Header></Navbar.Header>
         <Navbar.Body>

@@ -6,14 +6,19 @@ import { connect } from "react-redux";
 import { getStudentsList } from "../actions/studentAction";
 
 class StudentListContainer extends Component {
+  state = { width: 0, height: 0 };
   componentDidMount() {
     this.props.dispatch(getStudentsList());
+    window.addEventListener("resize", this.updateDimensions);
   }
 
-  handleRefresh(){
-    this.props.dispatch(getStudentsList());
-    console.log('test');
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
+
+  updateDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
 
   render() {
     return (
